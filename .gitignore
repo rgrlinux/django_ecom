@@ -1,1 +1,14 @@
+# Environments
 .eco
+
+# Django
+*.log
+*.pot
+*.pyc
+*~
+local_settings.py
+__pycache__/
+db.sqlite3
+/static
+.DS_Store
+media
