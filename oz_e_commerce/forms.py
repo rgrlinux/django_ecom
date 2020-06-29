@@ -1,15 +1,19 @@
 from django import forms
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class ContactForm(forms.Form):
-    fullname = forms.CharField(label='Nome Completo', error_messages={'required': 'Obrigado buta seu nome'},
-                               widget=forms.TextInput(
-                                   attrs={
-                                       "class": "form-control",
-                                       "placeholder": "Seu nome sua besta"
-                                   }
-                               )
-                               )
+    full_name = forms.CharField(
+        label='Nome Completo', error_messages={'required': 'Obrigado buta seu nome'},
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': "Seu nome sua besta"
+            }
+        )
+    )
     email = forms.EmailField(
         label='E-mail',
         error_messages={'required': 'Email inválido'},
@@ -30,3 +34,14 @@ class ContactForm(forms.Form):
             }
         )
     )
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if 'gmail.com' not in email:
+            raise forms.ValidationError('O email deve ser do gmail.com')
+        return email
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+
