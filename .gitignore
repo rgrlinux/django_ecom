@@ -1,6 +1,6 @@
 # Environments
-.eco
-
+.ecomm
+.idea
 # Django
 *.log
 *.pot
